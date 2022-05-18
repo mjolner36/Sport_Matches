@@ -2,6 +2,7 @@ package com.mjo.sportmatches
 
 import android.os.Bundle
 import android.util.Log
+
 import android.view.MenuItem
 import android.widget.CalendarView
 import android.widget.Toast
@@ -9,12 +10,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
-import com.mjo.sportmatches.api.RetrofitInstance
-import com.mjo.sportmatches.api.RetrofitInstance.retrofit
-import com.mjo.sportmatches.data.StageListResponse
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import com.mjo.sportmatches.api.RetrofitInstance.api
+import com.mjo.sportmatches.dataclasses.Matches
+
+import retrofit2.*
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +26,24 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
+
+        api.getMatchesList("basketball","20220518").enqueue(object: Callback<Matches>{
+
+            override fun onFailure(call: Call<Matches>, t: Throwable) {
+                Log.e("ERROR","$t")
+            }
+
+            override fun onResponse(
+                call: Call<Matches>,
+                response: Response<Matches>
+            ) {
+                if (!response.isSuccessful){
+                    Toast.makeText(applicationContext,"Oops! Something went wrong",Toast.LENGTH_SHORT).show()
+                }
+                Log.d("match",response.toString())
+            }
+
+        })
 
 
         var drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)

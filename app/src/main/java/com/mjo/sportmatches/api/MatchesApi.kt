@@ -1,9 +1,10 @@
 package com.mjo.sportmatches.api
 
-import com.mjo.sportmatches.data.StageListResponse
+
+import com.mjo.sportmatches.dataclasses.Matches
 import retrofit2.http.GET
 import retrofit2.http.Query
-import io.reactivex.rxjava3.core.Single
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -14,18 +15,18 @@ interface MatchesApi {
 
     @Headers(
             "X-RapidAPI-Host: livescore6.p.rapidapi.com",
-            "X-RapidAPI-Key: fc42b8fc95msh5b845373548d27bp115a3cjsncf06d7e4c9d8"
+            "X-RapidAPI-Key: e023fdbc0cmshf8a476c26e0d0d9p16453ejsne7633f6de9e1"
     )
 
-    @GET("./matches/v2/list-by-date")
-    fun getMatchesList(@Query("Category") sport:String, @Query("Date") date:String): Single<StageListResponse>
+    @GET("./matches/v2/list-by-date") //
+    fun getMatchesList(@Query("Category") sport:String, @Query("Date") date:String): Call<Matches>
 }
 
 object RetrofitInstance {
-    var retrofit = Retrofit.Builder()
-        .baseUrl("https://livescore6.p.rapidapi.com/")
+    var api = Retrofit.Builder()
+        .baseUrl("https://livescore6.p.rapidapi.com")
         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-        .create(StageListResponse::class.java)
+        .create(MatchesApi::class.java)
 }
