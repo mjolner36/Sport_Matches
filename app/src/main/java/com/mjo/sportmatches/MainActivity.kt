@@ -1,23 +1,33 @@
 package com.mjo.sportmatches
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import android.widget.CalendarView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import com.mjo.sportmatches.api.RetrofitInstance
+import com.mjo.sportmatches.api.RetrofitInstance.retrofit
+import com.mjo.sportmatches.data.StageListResponse
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : AppCompatActivity() {
     lateinit var toggle: ActionBarDrawerToggle
-    lateinit var calendarView: CalendarView
+    var calendarView:CalendarView?=null
     lateinit var sport:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+
+
         var drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
         var navView: NavigationView = findViewById(R.id.nav_view)
         navView.itemIconTintList = null;
@@ -49,11 +59,10 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-
-
-        var headerLayout: View = layoutInflater.inflate(R.layout.nav_header, null)
+        var headerLayout = navView.getHeaderView(0)
         calendarView= headerLayout.findViewById(R.id.calendarView)
-        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+
+        calendarView?.setOnDateChangeListener { view, year, month, dayOfMonth ->
             var mStr = ""
             var dStr = ""
             mStr = if (month + 1 <= 9) "0$month"
@@ -69,10 +78,8 @@ class MainActivity : AppCompatActivity() {
 
             }
 
+        }
 
-
-
-    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (toggle.onOptionsItemSelected(item))
             return true

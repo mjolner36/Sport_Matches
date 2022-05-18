@@ -1,4 +1,4 @@
-package com.mjo.sportmatches
+package com.mjo.sportmatches.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
