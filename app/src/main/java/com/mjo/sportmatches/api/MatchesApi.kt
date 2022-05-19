@@ -1,7 +1,7 @@
 package com.mjo.sportmatches.api
 
 
-import com.mjo.sportmatches.dataclasses.Matches
+import com.mjo.sportmatches.data.Matches
 import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.Call

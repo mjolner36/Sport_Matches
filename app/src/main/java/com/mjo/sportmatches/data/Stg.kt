@@ -1,4 +1,4 @@
-package com.mjo.sportmatches.dataclasses
+package com.mjo.sportmatches.data
 
 data class Stg(
     val Ccd: String,

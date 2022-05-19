@@ -1,6 +1,6 @@
-package com.mjo.sportmatches.dataclasses
+package com.mjo.sportmatches.data
 
-data class T1(
+data class T2(
     val CoId: String,
     val CoNm: String,
     val Gd: Int,
@@ -8,6 +8,6 @@ data class T1(
     val ID: String,
     val Img: String,
     val Nm: String,
-    val Pids: PidsX,
+    val Pids: PidsXX,
     val tbd: Int
 )
